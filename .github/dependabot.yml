@@ -11,14 +11,13 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "*"
-        # For Express, ignore all updates for version 4 and 5
-        versions: ["4.x", "5.x"]
-        # For Lodash, ignore all updates
-      - dependency-name: "lodash"
-        # For AWS SDK, ignore all patch updates
-      - dependency-name: "aws-sdk"
-        update-types: ["version-update:semver-patch", "version-update:semver-major"]  
+        update-types: ["version-update:semver-patch", "version-update:semver-major"]
+    open-pull-requests-limit: 20    
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch", "version-update:semver-major"]
+    open-pull-requests-limit: 20  
