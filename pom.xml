@@ -18,7 +18,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
+        <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <graalvm.version>22.2.0</graalvm.version>
         <spring.openapi.version>1.6.4</spring.openapi.version>
