@@ -1,0 +1,77 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+  #secrets-manager:
+     # key: secret-id:json-key:version-stage:version-id
+     # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+     # - variable
+     # - variable
+  #git-credential-helper: yes
+#batch:
+  #fast-fail: true
+  #build-list:
+  #build-matrix:
+  #build-graph:
+phases:
+  #install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    #runtime-versions:
+      # name: version
+      # name: version
+    #commands:
+      # - command
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+      # - command
+  build:
+    commands:
+      # - SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+      # - MY_GIT_TAG=$(git describe --abbrev=0 --tags)
+      # - MY_GIT_COMMIT=$(git log --format=%B -n 1)
+      # - MESSAGE="New deployment of ${MY_GIT_TAG} and ${MY_GIT_COMMIT}"
+      # - CONTENT="Content-type:application/json"
+      # - MYDATA='{"text":"Hello, World!"}'
+      #- curl -X POST -H ${CONTENT} --data ${MYDATA} https://hooks.slack.com/services/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
+      #- curl -X POST -H 'Content-type:application/json' --data '{\"text\":\"${MESSAGE}\"}' ${SLACK_WEBHOOK_URL}
+      # - command
+  post_build:
+    commands:
+      - SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+      - MY_GIT_TAG=$(git describe --abbrev=0 --tags)
+      - MY_GIT_COMMIT=$(git log --format=%B -n 1)
+      - MESSAGE="<@norikchichyan> Service-1 deployed on ENV1 \\n ${MY_GIT_TAG} release-$(date +%d/%m/%Y) \\n changelog is: \\n  ${MY_GIT_COMMIT}"
+      - echo $MESSAGE
+      # - CONTENT="Content-type:application/json"
+      # - MYDATA='{"text":"Hello, World!"}'
+      #- curl -X POST -H ${CONTENT} --data ${MYDATA} https://hooks.slack.com/services/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
+      - curl -X POST -H 'Content-type:application/json' --data "{\"text\":\"${MESSAGE}\"}" ${SLACK_WEBHOOK_URL}
+      # - command
+
+#reports:
+  #report-name-or-arn:
+    #files:
+      # - location
+      # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
+#artifacts:
+  #files:
+    # - location
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
