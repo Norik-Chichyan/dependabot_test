@@ -1,3 +1,3 @@
 ## dependabot_test
 add tag and commit message
-tag
+tag 1.0.0
