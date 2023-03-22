@@ -51,7 +51,7 @@ phases:
       - MY_GIT_COMMIT=$(git log --format=%B -n 1)
       - MESSAGE="<@norikchichyan> *Service-1* deployed on *ENV1* \n _${MY_GIT_TAG} release-$(date +%d/%m/%Y)_ \n changelog is \n \`\`\`${MY_GIT_COMMIT}\`\`\`"
       #- MESSAGE2="*Build succeeded!*"
-      - echo $MESSAGE2
+      - ls
       - echo $SLACK_WEBHOOK_URL
       - MESSAGE1="<@norikchichyan>"
 
