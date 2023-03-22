@@ -49,8 +49,9 @@ phases:
       #- SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
       - MY_GIT_TAG=$(git describe --abbrev=0 --tags)
       - MY_GIT_COMMIT=$(git log --format=%B -n 1)
-      - MESSAGE="<@norikchichyan> Service-1 deployed on *ENV1* \\n ${MY_GIT_TAG} release-$(date +%d/%m/%Y) \\n changelog is `your text` ${MY_GIT_COMMIT}"
-      - echo $MESSAGE
+      - MESSAGE="<@norikchichyan> *Service-1* deployed on *ENV1* \n _${MY_GIT_TAG} release-$(date +%d/%m/%Y)_ \n changelog is \n \`\`\`${MY_GIT_COMMIT}\`\`\`"
+      #- MESSAGE2="*Build succeeded!*"
+      - echo $MESSAGE2
       - echo $SLACK_WEBHOOK_URL
       - MESSAGE1="<@norikchichyan>"
 
