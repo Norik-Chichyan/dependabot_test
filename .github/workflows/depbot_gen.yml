@@ -1,0 +1,40 @@
+name: Generate Dependabot Config
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches:
+      - 'main'
+    types: [ opened, synchronize, reopened ]
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Dependabot Config
+        run: |
+          echo "version: 2" > dependabot.yml
+          echo "updates:" >> dependabot.yml
+          for path in ${{ steps.get_paths.outputs.paths }}; do
+            echo "  - package-ecosystem: 'terraform'" >> dependabot.yml
+            echo "    directory: '${path}'" >> dependabot.yml
+            echo "    target-branch: 'develop-test'" >> dependabot.yml
+            echo "    schedule:" >> dependabot.yml
+            echo "      interval: 'daily'" >> dependabot.yml
+            echo "    reviewers:" >> dependabot.yml
+            echo "      - 'admin'" >> dependabot.yml
+            echo "    ignore:" >> dependabot.yml
+            echo "      - dependency-name: '*'" >> dependabot.yml
+            echo "        update-types: ['version-update:semver-major']" >> dependabot.yml
+            echo "    open-pull-requests-limit: 5" >> dependabot.yml
+          done
+        env:
+          PATHS: ${{ steps.get_paths.outputs.paths }}
+      - name: Get Directory Paths
+        run: |
+          echo "::set-output name=paths::$(find . -name 'versions.tf' -exec dirname {} \;)" > paths.txt
+        shell: bash
+      - name: Parse Directory Paths
+        id: get_paths
+        run: |
+          echo "::set-output name=paths::$(echo ${{ steps.get_paths.outputs.paths }} | tr '\n' ',' | sed 's/,$//')" > output.txt
+        shell: bash
